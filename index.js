@@ -67,7 +67,63 @@ const deletarReceita = (id) => {
   receitas.splice(posicao, 1);
 
   console.log("=============================");
-  console.log(`Receita removida com sucesso!`);
+  console.log("Receita removida com sucesso!");
+  console.log("=============================");
+};
+
+const atualizarReceita = (
+  id,
+  { titulo, dificuldade, ingredientes, preparo, video, vegana }
+) => {
+  const posicao = receitas.findIndex((receita) => receita.id === id);
+
+  if (posicao === -1) {
+    console.log("Receita não encontrada.");
+    return;
+  }
+
+  // const receita = {
+  //   ...receitas[posicao],
+  //   ...(titulo ? { titulo } : {}),
+  //   ...(dificuldade ? { dificuldade } : {}),
+  //   ...(ingredientes ? { ingredientes } : {}),
+  //   ...(preparo ? { preparo } : {}),
+  //   ...(video ? { video } : {}),
+  //   ...(vegana ? { vegana } : {}),
+  // };
+
+  // receitas[posicao] = receita;
+
+  receitas[posicao].titulo = titulo ? titulo : receitas[posicao].titulo;
+  receitas[posicao].dificuldade = dificuldade
+    ? dificuldade
+    : receitas[posicao].dificuldade;
+  receitas[posicao].ingredientes = ingredientes
+    ? ingredientes
+    : receitas[posicao].ingredientes;
+  receitas[posicao].preparo = preparo ? preparo : receitas[posicao].preparo;
+  receitas[posicao].video = video ? video : receitas[posicao].video;
+  receitas[posicao].vegana = vegana ? vegana : receitas[posicao].vegana;
+
+  console.log("=============================");
+  console.log(`Receita ${titulo} atualizada com sucesso!`);
+  console.log("=============================");
+};
+
+const exibirReceitas = () => {
+  console.log("=============================");
+  // for (i = 0; i < receitas.length; i++) {
+  //   console.log(`Título: ${receitas[i].titulo}`);
+  //   console.log(`Ingredientes: ${receitas[i].ingredientes}`);
+  //   console.log(`Vegana: ${receitas[i].vegana ? "Sim" : "Não"}`);
+  //   console.log("-----------------------------");
+  // }
+  receitas.forEach((receita) => {
+    console.log(`Título: ${receita.titulo}`);
+    console.log(`Ingredientes: ${receita.ingredientes}`);
+    console.log(`Vegana: ${receita.vegana ? "Sim" : "Não"}`);
+    console.log("-----------------------------");
+  });
   console.log("=============================");
 };
 
@@ -89,4 +145,8 @@ cadastrarReceita(
 
 // console.table(receitas);
 
-deletarReceita(1);
+// deletarReceita(1);
+
+atualizarReceita(2, { titulo: "Pipoca do Francis", vegana: true });
+
+exibirReceitas();
